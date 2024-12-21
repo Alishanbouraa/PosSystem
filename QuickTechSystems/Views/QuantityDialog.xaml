@@ -1,0 +1,77 @@
+﻿<Window x:Class="QuickTechSystems.WPF.Views.QuantityDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Change Quantity" 
+        Height="300" 
+        Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Product Info -->
+        <TextBlock Text="{Binding ProductName}" 
+                 FontWeight="Bold"
+                 FontSize="16"
+                 Margin="0,0,0,10"/>
+
+        <!-- Available Stock -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,15">
+            <TextBlock Text="Available Stock:"
+                     Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding AvailableStock}"
+                     FontSize="14"
+                     Foreground="#2980b9"/>
+        </StackPanel>
+
+        <!-- Current Quantity -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,15">
+            <TextBlock Text="Current Quantity:"
+                     Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding CurrentQuantity}"
+                     FontSize="14"
+                     FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- New Quantity Input -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,20">
+            <TextBlock Text="New Quantity:"
+                     Margin="0,0,0,5"/>
+            <TextBox Text="{Binding NewQuantity, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="18"
+                    Padding="5"
+                    PreviewTextInput="NumberValidationTextBox"/>
+
+            <!-- Quick Quantity Buttons -->
+            <UniformGrid Columns="4" Margin="0,10,0,0">
+                <Button Content="+1" Click="IncrementQuantity" Margin="2"/>
+                <Button Content="+5" Click="IncrementQuantityBy5" Margin="2"/>
+                <Button Content="+10" Click="IncrementQuantityBy10" Margin="2"/>
+                <Button Content="Max" Click="SetMaxQuantity" Margin="2"/>
+            </UniformGrid>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="4" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button Content="Apply" 
+                    IsDefault="True"
+                    Click="ApplyButton_Click"
+                    Width="80" 
+                    Height="30"
+                    Margin="0,0,10,0"/>
+            <Button Content="Cancel" 
+                    IsCancel="True"
+                    Width="80"
+                    Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>

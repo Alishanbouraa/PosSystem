@@ -1,0 +1,184 @@
+﻿<Window x:Class="QuickTechSystems.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuickTechSystems.WPF"
+        xmlns:views="clr-namespace:QuickTechSystems.WPF.Views"
+        xmlns:viewModels="clr-namespace:QuickTechSystems.WPF.ViewModels"
+        mc:Ignorable="d"
+        Title="QuickTech Systems"
+        Height="800" 
+Width="1200">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModels:ProductViewModel}">
+                <views:ProductView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CategoryViewModel}">
+                <views:CategoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CustomerViewModel}">
+                <views:CustomerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TransactionViewModel}">
+                <views:TransactionView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:SupplierViewModel}">
+                <views:SupplierView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:InventoryViewModel}">
+                <views:InventoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TransactionHistoryViewModel}">
+                <views:TransactionHistoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:DebtViewModel}">
+                <views:DebtView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ProfitViewModel}">
+                <views:ProfitView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Navigation Panel -->
+        <Border Grid.Column="0" 
+                Background="#2C3E50">
+            <StackPanel>
+                <!-- App Title -->
+                <TextBlock Text="QuickTech Systems"
+                         Foreground="White"
+                         FontSize="20"
+                         FontWeight="Bold"
+                         Margin="10,20,10,30"
+                         TextAlignment="Center"/>
+
+                <!-- Navigation Buttons -->
+                <Button Content="Dashboard" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Dashboard"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Transactions" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Transactions"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Transaction History" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="TransactionHistory"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Products" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Products"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Categories" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Categories"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Inventory" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Inventory"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Customers" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Customers"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Suppliers" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Suppliers"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Debt Management" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Debts"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Reports" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Reports"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+
+                <Button Content="Settings" 
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="Settings"
+                        Height="45" 
+                        Margin="10,5"
+                        Background="#34495E"
+                        Foreground="White"
+                        BorderThickness="0"/>
+                <Button Content="Profit" 
+        Command="{Binding NavigateCommand}" 
+        CommandParameter="Profit"
+        Height="45" 
+        Margin="10,5"
+        Background="#34495E"
+        Foreground="White"
+        BorderThickness="0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Column="1" 
+                Background="#ECF0F1">
+            <ContentControl Content="{Binding CurrentViewModel}"
+                          Margin="10"/>
+        </Border>
+    </Grid>
+</Window>

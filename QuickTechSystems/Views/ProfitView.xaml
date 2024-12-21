@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="QuickTechSystems.WPF.Views.ProfitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Profit Analysis"
+                 FontSize="24"
+                 FontWeight="Bold"
+                 Margin="0,0,0,20"/>
+
+        <!-- Date Selection -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="From:" 
+                     VerticalAlignment="Center"
+                     Margin="0,0,10,0"/>
+            <DatePicker Grid.Column="1"
+                      SelectedDate="{Binding StartDate}"
+                      Width="150"
+                      Margin="0,0,20,0"/>
+
+            <TextBlock Grid.Column="2" 
+                     Text="To:" 
+                     VerticalAlignment="Center"
+                     Margin="0,0,10,0"/>
+            <DatePicker Grid.Column="3"
+                      SelectedDate="{Binding EndDate}"
+                      Width="150"/>
+        </Grid>
+
+        <!-- Profit Display -->
+        <Border Grid.Row="2" 
+                Background="White"
+                BorderBrush="#DEE2E6"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="20">
+            <StackPanel>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Total Sales:"
+                             FontSize="18"/>
+                    <TextBlock Grid.Column="1"
+                             Text="{Binding Profit.TotalSales, StringFormat=C2}"
+                             FontSize="18"
+                             FontWeight="SemiBold"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Total Cost:"
+                             FontSize="18"/>
+                    <TextBlock Grid.Column="1"
+                             Text="{Binding Profit.TotalCost, StringFormat=C2}"
+                             FontSize="18"
+                             FontWeight="SemiBold"/>
+                </Grid>
+
+                <Separator Margin="0,10"/>
+
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Gross Profit:"
+                             FontSize="24"
+                             FontWeight="Bold"/>
+                    <TextBlock Grid.Column="1"
+                             Text="{Binding Profit.GrossProfit, StringFormat=C2}"
+                             FontSize="24"
+                             FontWeight="Bold"
+                             Foreground="#27AE60"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

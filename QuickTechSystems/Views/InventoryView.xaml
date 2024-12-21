@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="QuickTechSystems.WPF.Views.InventoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Inventory Management"
+                         FontSize="24"
+                         FontWeight="Bold"/>
+                <TextBlock Text="Monitor and manage your inventory"
+                         Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                         Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" 
+                        Orientation="Horizontal">
+                <Button Content="Export"
+                        Command="{Binding ExportCommand}"
+                        Width="100"
+                        Height="35"
+                        Margin="0,0,10,0"/>
+                <Button Content="Adjust Stock"
+                        Command="{Binding AdjustStockCommand}"
+                        Width="100"
+                        Height="35"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel - Stock Movements -->
+            <Grid Margin="0,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Search and Filter -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             Padding="5">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="HintBrush" TileMode="None" 
+                                                Stretch="None" AlignmentX="Left">
+                                        <VisualBrush.Visual>
+                                            <TextBlock Text="Search products..."
+                                                     Foreground="Gray"
+                                                     Margin="5,0,0,0"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background" 
+                                                Value="{StaticResource HintBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <DatePicker Grid.Column="1"
+                               SelectedDate="{Binding StartDate}"
+                               Width="120"
+                               Margin="10,0"/>
+
+                    <DatePicker Grid.Column="2"
+                               SelectedDate="{Binding EndDate}"
+                               Width="120"/>
+                </Grid>
+
+                <!-- Stock Movements Grid -->
+                <DataGrid Grid.Row="1"
+                          ItemsSource="{Binding RecentMovements}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date" 
+                                          Binding="{Binding Date}"
+                                          Width="150"/>
+                        <DataGridTextColumn Header="Product" 
+                                          Binding="{Binding ProductName}"
+                                          Width="*"/>
+                        <DataGridTextColumn Header="Type" 
+                                          Binding="{Binding OperationType}"
+                                          Width="100"/>
+                        <DataGridTextColumn Header="Quantity" 
+                                          Binding="{Binding QuantityChanged}"
+                                          Width="100"/>
+                        <DataGridTextColumn Header="Reference" 
+                                          Binding="{Binding Reference}"
+                                          Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Right Panel - Low Stock -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Low Stock Alert"
+                         FontSize="18"
+                         FontWeight="SemiBold"
+                         Margin="0,0,0,10"/>
+
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding LowStockProducts}"
+                         SelectedItem="{Binding SelectedProduct}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}"
+                                             FontWeight="SemiBold"/>
+                                    <StackPanel Orientation="Horizontal"
+                                              Margin="0,5,0,0">
+                                        <TextBlock Text="Current: "/>
+                                        <TextBlock Text="{Binding CurrentStock}"
+                                                 Margin="5,0"/>
+                                        <TextBlock Text="Min: "/>
+                                        <TextBlock Text="{Binding MinimumStock}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
